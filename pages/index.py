@@ -20,10 +20,6 @@ column1 = dbc.Col(
 
             ESRB Prediction is an app that predicts the ESRB rating of any game you play to help you figure out if the game fits for your children 
 
-            ✅ 
-
-            ❌ 
-
             """
         ),
         dcc.Link(dbc.Button("Let's predict", color='primary'), href='/predictions')

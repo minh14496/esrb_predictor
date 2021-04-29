@@ -10,6 +10,7 @@ from dash.dependencies import Input, Output
 from app import app
 from joblib import load
 import pandas as pd
+# import shap
 pipeline = load('pages/pipeline.joblib')
 
 # 2 column layout. 1st column width = 4/12
@@ -21,7 +22,7 @@ column1 = dbc.Col(
         
             ## Predictions
 
-            Your instructions: How to use your app to get new predictions.
+            Answer all the questions you can think of about the game your children play
 
             """
         ),
@@ -36,7 +37,8 @@ column1 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),  
         dcc.Markdown(
             """
@@ -49,7 +51,8 @@ column1 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),
         dcc.Markdown(
             """
@@ -62,7 +65,8 @@ column1 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),
         dcc.Markdown(
             """
@@ -75,7 +79,8 @@ column1 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),
         dcc.Markdown(
             """
@@ -88,7 +93,8 @@ column1 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         )
     ],
     md=4,
@@ -107,7 +113,8 @@ column2 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),
         dcc.Markdown(
             """
@@ -120,7 +127,8 @@ column2 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),  
         dcc.Markdown(
             """
@@ -133,7 +141,8 @@ column2 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),  
 
         dcc.Markdown(
@@ -147,7 +156,8 @@ column2 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
+            value=1,
+            className='mb-2'
         ),
         dcc.Markdown(
             """
@@ -160,8 +170,9 @@ column2 = dbc.Col(
                 {'label': 'Yes', 'value': 1},
                 {'label': 'No', 'value': 0}
             ],
-            value=1
-        )
+            value=1,
+            className='mb-2'
+        ),
     ],
     md=4
 )
@@ -170,14 +181,13 @@ column3 = dbc.Col(
     [
         dcc.Markdown('',id='prediction-content', style={
         'textAlign':'center',
-        'font-size':30})
-        # dcc.Graph(id='shap-content')   
+        'font-size':30}),
+        dcc.Graph()
     ]
 )
 
 @app.callback(
-    Output('prediction-content','children')
-    # Output('shap-content','figure')
+    Output('prediction-content','children'),
     [ Input('mild_violence_input', 'value'),
       Input('gambling_input', 'value'),
       Input('no_descriptor_input', 'value'),
@@ -206,10 +216,10 @@ violence,blood_and_gore,fantasy_violence,strong_language,blood):
     data=[[mild_violence,simulated_gambling,no_descriptors,language,suggestive_themes,
     violence,blood_and_gore,fantasy_violence,strong_language,blood]])
     y_pred = pipeline.predict(df)[0]
+    # shap.initjs()
     # explainer = shap.TreeExplainer(pipeline)
     # shap_values = explainer.shap_values(df)
-    # shap_plot = shap.summary_plot(shap_values[0], df)
+    # shap.summary_plot(shap_values[0], df)
     return "The ESRB rating is {}".format(y_pred)
-    # return "The ESRB rating is {}".format(y_pred), shap_plot
 
 layout = dbc.Row([column1,column2,column3])
