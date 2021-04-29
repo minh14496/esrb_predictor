@@ -102,6 +102,58 @@ column1 = dbc.Col(
                 {'label': 'No', 'value': 0}
             ],
             value=1
+        ),
+        dcc.Markdown(
+            """
+            ##### Language
+            """
+        ),
+        dcc.RadioItems(
+            id='language_input',
+            options=[
+                {'label': 'Yes', 'value': 1},
+                {'label': 'No', 'value': 0}
+            ],
+            value=1
+        ),
+        dcc.Markdown(
+            """
+            ##### Language
+            """
+        ),
+        dcc.RadioItems(
+            id='language_input',
+            options=[
+                {'label': 'Yes', 'value': 1},
+                {'label': 'No', 'value': 0}
+            ],
+            value=1
+        ),
+        dcc.Markdown(
+            """
+            ##### Language
+            """
+        ),
+        dcc.RadioItems(
+            id='language_input',
+            options=[
+                {'label': 'Yes', 'value': 1},
+                {'label': 'No', 'value': 0}
+            ],
+            value=1
+        ),
+        dcc.Markdown(
+            """
+            ##### Language
+            """
+        ),
+        dcc.RadioItems(
+            id='language_input',
+            options=[
+                {'label': 'Yes', 'value': 1},
+                {'label': 'No', 'value': 0}
+            ],
+            value=1
         )    
  
     ],
